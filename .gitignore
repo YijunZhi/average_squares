@@ -2,3 +2,6 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .ipynb_checkpoints/
+
+# Sphinx build output
+docs/_build/
