@@ -47,7 +47,13 @@ def convert_numbers(list_of_strings):
         # whitespace, and collect them into a single list...
         all_numbers.extend([token.strip() for token in s.split()])
     # ...then convert each substring into a number
-    return [float(number_string) for number_string in all_numbers]
+    result = []
+    for number_string in all_numbers:
+        try:
+            result.append(int(number_string))   # 能整型就整型
+        except ValueError:
+            result.append(float(number_string)) # 否则再用 float
+    return result
 
 
 if __name__ == "__main__":
