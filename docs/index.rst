@@ -13,5 +13,6 @@ to build documentation with Sphinx.
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   
    content/average-squares-docs
 
