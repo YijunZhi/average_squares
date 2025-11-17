@@ -1,5 +1,5 @@
 """Computation of weighted average of squares."""
-
+import argparse
 
 def average_of_squares(list_of_numbers, list_of_weights=None):
     """ Return the weighted average of a list of values.
@@ -55,14 +55,29 @@ def convert_numbers(list_of_strings):
             result.append(float(number_string)) # 否则再用 float
     return result
 
+def parse_args():
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(
+        description="Compute the (weighted) average of squares."
+    )
+    # 位置参数：一串 numbers
+    parser.add_argument(
+        "numbers",
+        nargs="+",      # 至少 1 个，可以很多个
+        help="Numbers whose squares will be averaged.",
+    )
+    return parser.parse_args()
+
 
 if __name__ == "__main__":
-    numbers_strings = ["1","2","4"]
-    weight_strings = ["1","1","1"]        
-    
-    numbers = convert_numbers(numbers_strings)
-    weights = convert_numbers(weight_strings)
-    
-    result = average_of_squares(numbers, weights)
-    
+    # 1. 解析命令行拿到字符串形式的 numbers
+    args = parse_args()
+
+    # 2. 用你写好的 convert_numbers 把字符串变成数字列表
+    list_of_numbers = convert_numbers(args.numbers)
+
+    # 3. 调用 average_of_squares，weights 不传，默认为 None（等权重）
+    result = average_of_squares(list_of_numbers)
+
+    # 4. print the outcome
     print(result)
