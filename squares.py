@@ -66,6 +66,11 @@ def parse_args():
         nargs="+",      # 至少 1 个，可以很多个
         help="Numbers whose squares will be averaged.",
     )
+    parser.add_argument(
+        "--weights",
+        nargs="+",   # 0.1 2 0.1 这样的多值
+        help="Optional weights for each number.",
+    )
     return parser.parse_args()
 
 
@@ -76,8 +81,14 @@ if __name__ == "__main__":
     # 2. 用你写好的 convert_numbers 把字符串变成数字列表
     list_of_numbers = convert_numbers(args.numbers)
 
-    # 3. 调用 average_of_squares，weights 不传，默认为 None（等权重）
+    # 3. 处理可选的 weights
+    if args.weights is None:
+        list_of_weights = None          # 不给就走默认等权重
+    else:
+        list_of_weights = convert_numbers(args.weights)
+
+    # 4. 调用 average_of_squares，weights 不传，默认为 None（等权重）
     result = average_of_squares(list_of_numbers)
 
-    # 4. print the outcome
+    # 5. print the outcome
     print(result)
